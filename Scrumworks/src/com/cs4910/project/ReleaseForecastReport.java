@@ -8,8 +8,8 @@ import com.danube.scrumworks.api2.client.*;
 
 public class ReleaseForecastReport
 {
-	APISoapClient client;
-	ScrumWorksAPIService service;
+	protected APISoapClient client;
+	protected ScrumWorksAPIService service;
 	
 	//May need to change to an array, for use of multiple sprints
 	public List<Date> endDate;
@@ -38,7 +38,7 @@ public class ReleaseForecastReport
 		getData();
 	}
 	
-	public void getData() 
+	public void getData()
 	{
 		try 
 		{
@@ -57,10 +57,11 @@ public class ReleaseForecastReport
 			System.out.println(sprints.get(0).getStartDate());
 			for (i = 0; i < sprints.size(); i++)
 			{
-				System.out.println(i);
+				//System.out.println(i);
+				//Each item is in same order of sprints.
 				startDate.add(sprints.get(i).getStartDate());
 				endDate.add(sprints.get(i).getEndDate());
-				System.out.println("Start: " + startDate.get(i) + "\nEnd: " + endDate.get(i));
+				//System.out.println("Start: " + startDate.get(i) + "\nEnd: " + endDate.get(i));
 			}
 		}
 		catch (ScrumWorksException e) 
