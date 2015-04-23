@@ -1,36 +1,52 @@
-package model;
+package com.cs4910.project;
 
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- * <!-- begin-user-doc -->
- * <!--  end-user-doc  -->
- * @generated
- */
+import com.danube.scrumworks.api2.client.*;
+
 
 public class CommitmentRatioReport
 {
 	/**
 	 * change to list data type<div>used as placeholder</div>
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
+	protected APISoapClient client;
+	protected ScrumWorksAPIService service;
 	
-	public byte[] sprints;
+	public List<Sprint> sprints;
 	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 */
-	public CommitmentRatioReport(){
+	
+	public CommitmentRatioReport()
+	{
 		super();
+		client = new APISoapClient();
+		service = client.getAPIservice();
+		
+		try 
+		{
+			List<Product> products = service.getProducts();
+			List<Long> pIds = new ArrayList<Long>();
+			List<Sprint> sprList = new ArrayList<Sprint>();
+			//int i = 0;
+			for (Product p : products)
+			{
+				pIds.add(p.getId());
+			}
+			sprList = service.getSprintsForProduct(products.get(1).getId());
+			sprints = (ArrayList<Sprint>) sprList;
+		} catch (ScrumWorksException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
@@ -41,8 +57,7 @@ public class CommitmentRatioReport
 	}
 	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
@@ -53,8 +68,7 @@ public class CommitmentRatioReport
 	}
 	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
@@ -65,8 +79,7 @@ public class CommitmentRatioReport
 	}
 	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
@@ -76,8 +89,7 @@ public class CommitmentRatioReport
 	}
 	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */
@@ -87,8 +99,7 @@ public class CommitmentRatioReport
 	}
 	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
+	 * 
 	 * @generated
 	 * @ordered
 	 */

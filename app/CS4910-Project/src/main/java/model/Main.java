@@ -1,90 +1,50 @@
-package model;
-import java.util.LinkedList;
+package com.cs4910.project;
+
 import java.util.List;
+
+import com.danube.scrumworks.api2.client.ScrumWorksAPIService;
 
 
 /**
- * <!-- begin-user-doc -->
- * <!--  end-user-doc  -->
+*<!--end-user-doc-->
  * @generated
  */
 
 public class Main
 {
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
+	APISoapClient client;
+	ScrumWorksAPIService service;
 	
 	public String name;
 	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
-	
 	public ReleaseForecastReport releaseReport;
-	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
 	
 	public ExportTool exportTool;
 	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
-	
-	public UserInterface userInterface;
-	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
+	//public UserInterface userInterface;
 	
 	public CommitmentRatioReport ratioReport;
 	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 */
-	public Main(){
+	public Main()
+	{
 		super();
+		load();
+		System.out.println("Loaded...");
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
 	
-	public void load() {
+	public void load() 
+	{
 		// TODO implement me	
+		client = new APISoapClient();
+		service = client.getAPIservice();
+		releaseReport = new ReleaseForecastReport();
+		
 	}
 	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
-	
-	public void main(String[] args) {
-		// TODO implement me	
+	public static void main(String[] args) 
+	{
+		Main me = new Main();
 	}
 	
 }

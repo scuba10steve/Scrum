@@ -1,4 +1,4 @@
-package model;
+package com.cs4910.project;
 
 
 /**
