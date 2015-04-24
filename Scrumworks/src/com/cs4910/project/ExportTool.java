@@ -7,7 +7,7 @@ import com.danube.scrumworks.api2.client.ScrumWorksAPIService;
 public class ExportTool
 {
 	
-	public String filename;
+	private String filename;
 	
 	protected APISoapClient client;
 	protected ScrumWorksAPIService service;
@@ -22,8 +22,16 @@ public class ExportTool
 	
 	public void exportToPDF() 
 	{
-		// TODO implement me	
+		
 	}
 	
+	public void setFilename(String filename)
+	{
+		this.filename = filename;
+	}
+	
+	public String getFilename()
+	{
+		return this.filename;
+	}
 }
-
