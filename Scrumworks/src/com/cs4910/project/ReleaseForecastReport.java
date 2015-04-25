@@ -8,7 +8,7 @@ import com.danube.scrumworks.api2.client.*;
 
 public class ReleaseForecastReport
 {
-	protected APISoapClient client;
+	//protected APISoapClient client;
 	protected ScrumWorksAPIService service;
 	
 	//May need to change to an array, for use of multiple sprints
@@ -27,15 +27,42 @@ public class ReleaseForecastReport
 	public Date lateReleaseDate;
 	
 	public ArrayList<Sprint> sprints;
+	public ArrayList<Integer> pointsPerSprint; 
 	
-	public ReleaseForecastReport()
+	private Product product; 
+	private Release release; 
+	
+	public ReleaseForecastReport(ScrumWorksAPIService srvc, Product prod, Release rel) throws ScrumWorksException
 	{
-		super();
-		client = new APISoapClient();
-		service = client.getAPIservice();
+		service = srvc; 
+		product = prod; 
+		release = rel; 
+		try {
+			sprints = new ArrayList<Sprint>(service.getSprintsForProduct(product.getId()));
+		} catch (ScrumWorksException e) {
+			e.printStackTrace();
+		} 
+		pointsPerSprint = new ArrayList<Integer>(); 
+		
+		/** Just ignore this.
+		System.out.println(sprints.size()); 
+		totalStoryPoints = 0; 
+		for (Sprint sp : sprints){
+			System.out.println("******"); 
+			System.out.println(sp.getStartDate() + " => " + sp.getEndDate()); 
+			List<BacklogItem> blitems = service.getBacklogItemsForSprint(sp.getId(), false); 
+			int totalStoryPointsInSprint = 0 ; 
+			for (BacklogItem bli : blitems ){
+				int tempPts = bli.getEstimate(); 
+				totalStoryPointsInSprint += tempPts;
+				totalStoryPoints += tempPts; 
+			}
+			System.out.println("Total points: " + totalStoryPointsInSprint); 
+			pointsPerSprint.add(totalStoryPointsInSprint); 
+		}**/
 		endDate = new ArrayList<Date>();
 		startDate = new ArrayList<Date>();
-		getData();
+		//getData();
 	}
 	
 	public void getData()
@@ -119,6 +146,14 @@ public class ReleaseForecastReport
 	public void getTargetForecastLine() 
 	{
 		// TODO implement me	
+	}
+	
+	public String getProductName() { 
+		return product.getName(); 
+	}
+	
+	public String getReleaseName() { 
+		return release.getName(); 
 	}
 	
 }
