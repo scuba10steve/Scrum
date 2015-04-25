@@ -148,6 +148,7 @@ public class ReleaseForecastReport
 		// TODO implement me	
 	}
 	
+<<<<<<< HEAD
 	public String getProductName() { 
 		return product.getName(); 
 	}
@@ -158,3 +159,6 @@ public class ReleaseForecastReport
 	
 }
 
+=======
+}
+>>>>>>> 8d78ef1b05dca1398a44d18804d76de9dcc884d2

@@ -172,6 +172,7 @@ public class Main extends JApplet {
 		}
 	}
 	
+<<<<<<< HEAD
 	private class RelForecastRadioListener implements ActionListener { 
 		@Override
 		public void actionPerformed(ActionEvent e){ 
@@ -191,3 +192,6 @@ public class Main extends JApplet {
 	}
 
 }
+=======
+}
+>>>>>>> 8d78ef1b05dca1398a44d18804d76de9dcc884d2
