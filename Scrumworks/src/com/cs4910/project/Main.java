@@ -31,6 +31,7 @@ public class Main extends JApplet {
 	public Main() {
 		// load service from ScrumWorks, so we can access ScrumWorks data
 		loadService();
+		
 		//get all products from ScrumWorks, so the user can select them. 
 		try {
 			products = service.getProducts();
@@ -97,7 +98,6 @@ public class Main extends JApplet {
 
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
-		// JPanel panel = new MainGUI() ;
 		JApplet applet = new Main();
 
 		applet.setSize(1020, 620);
@@ -149,7 +149,9 @@ public class Main extends JApplet {
 				reportPanel = new RFRGUI(rfr); 
 			}
 			else { 
-				reportPanel = new CommRatioGUI(); 
+				CommitmentRatioReport crr; 
+				crr = new CommitmentRatioReport(service, product, release); 
+				reportPanel = new CommRatioGUI(crr); 
 			}
 			mainPanel.add(reportPanel); 
 			mainPanel.revalidate();
@@ -172,7 +174,6 @@ public class Main extends JApplet {
 		}
 	}
 	
-<<<<<<< HEAD
 	private class RelForecastRadioListener implements ActionListener { 
 		@Override
 		public void actionPerformed(ActionEvent e){ 
@@ -192,6 +193,3 @@ public class Main extends JApplet {
 	}
 
 }
-=======
-}
->>>>>>> 8d78ef1b05dca1398a44d18804d76de9dcc884d2

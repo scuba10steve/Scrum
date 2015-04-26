@@ -1,5 +1,6 @@
 package com.cs4910.project;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -31,6 +32,7 @@ public class ReleaseForecastReport
 	
 	private Product product; 
 	private Release release; 
+	private int variance; 
 	
 	public ReleaseForecastReport(ScrumWorksAPIService srvc, Product prod, Release rel) throws ScrumWorksException
 	{
@@ -103,14 +105,52 @@ public class ReleaseForecastReport
 		// TODO implement me	
 	}
 	
+	//return average sprint velocity
+	public int getAvgSprintVel() { 
+		//setup dummy data
+		avgSprintVel = 50; 
+		return avgSprintVel; 
+	}
+	
 	public void calculateStdDev() 
 	{
 		// TODO implement me	
 	}
 	
+	public int getLowVelocity() {
+		//dummy data
+		return 15; 
+	}
+	
+	public int getHighVelocity() { 
+		//dummy data
+		return 84; 
+	}
+	
 	public void calculateAverageReleaseDates()
 	{
 		// TODO implement me	
+	}
+	
+	public String getAverageReleaseDate() { 
+		//dummy data
+		return "4/22/2015"; 
+	}
+	
+	public String getEarlyReleaseDate() { 
+		//dummy data
+		return "3/18/15"; 
+	}
+	
+	public String getLateReleaseDate() { 
+		//dummy data
+		return "11/2/15"; 
+	}
+	
+	public int getVariance() { 
+		//dummy data
+		variance = 50 ; 
+		return variance; 
 	}
 	
 	public void exportToPDF() 
@@ -123,32 +163,64 @@ public class ReleaseForecastReport
 		// TODO implement me	
 	}
 	
-	public void getLateReleaseLine() 
+	public ArrayList<Point> getLateReleaseLine() 
 	{
-		// TODO implement me	
+		ArrayList<Point> lateReleasePoints = new ArrayList<Point>();
+		for (int i = 1; i <= 18; i++) {
+			lateReleasePoints.add(new Point(i, 15 * i));
+		}
+		return lateReleasePoints; 
 	}
 	
-	public void getAverageReleaseLine() 
+	public ArrayList<Point> getAverageReleaseLine() 
 	{
-		// TODO implement me	
+		ArrayList<Point> averageReleasePoints = new ArrayList<Point>(); 
+		for (int i = 1; i <= 9; i++) {
+			averageReleasePoints.add(new Point(i, 50 * i));
+		}
+		return averageReleasePoints; 
 	}
 	
-	public void getEarlyReleaseLine() 
+	public ArrayList<Point> getEarlyReleaseLine() 
 	{
-		// TODO implement me	
+		ArrayList<Point> earlyReleasePoints = new ArrayList<Point>(); 
+		for (int i = 1; i <= 5; i++) {
+			earlyReleasePoints.add(new Point(i, 84 * i));
+		}	
+		return earlyReleasePoints; 
 	}
 	
-	public void getTotalReleaseLine() 
+	public ArrayList<Point> getTotalReleaseLine() 
 	{
-		// TODO implement me	
+		ArrayList<Point> totalPointsInRel = new ArrayList<Point>();
+		totalPointsInRel.add(new Point(1, 230));
+		totalPointsInRel.add(new Point(2, 230));
+		totalPointsInRel.add(new Point(3, 265));
+		totalPointsInRel.add(new Point(4, 285));
+		totalPointsInRel.add(new Point(5, 345));
+		totalPointsInRel.add(new Point(6, 450));
+		totalPointsInRel.add(new Point(7, 450));
+		totalPointsInRel.add(new Point(8, 450));
+		totalPointsInRel.add(new Point(9, 450));	
+		return totalPointsInRel; 
 	}
 	
-	public void getTargetForecastLine() 
+	public ArrayList<Point> getTargetForecastLine() 
 	{
-		// TODO implement me	
+		ArrayList<Point> targetForecastPoints = new ArrayList<Point>(); 
+		targetForecastPoints.add(new Point(1, 210));
+		targetForecastPoints.add(new Point(2, 230));
+		targetForecastPoints.add(new Point(3, 205));
+		targetForecastPoints.add(new Point(4, 195));
+		targetForecastPoints.add(new Point(5, 200));
+		targetForecastPoints.add(new Point(6, 0));
+		targetForecastPoints.add(new Point(7, 0));
+		targetForecastPoints.add(new Point(8, 0));
+		targetForecastPoints.add(new Point(9, 0));
+		return targetForecastPoints; 
+	
 	}
 	
-<<<<<<< HEAD
 	public String getProductName() { 
 		return product.getName(); 
 	}
@@ -159,6 +231,3 @@ public class ReleaseForecastReport
 	
 }
 
-=======
-}
->>>>>>> 8d78ef1b05dca1398a44d18804d76de9dcc884d2

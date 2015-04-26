@@ -25,24 +25,23 @@ public class RFRGUI extends JPanel {
 
 	public RFRGUI(ReleaseForecastReport report) {
 		super(new GridLayout(2, 1, 0, 0));
-		rfr = report; 
-		// pull info from another class
-		// use dummy data for now
 		setBorder(new EmptyBorder(10, 10, 10, 10));
-		targetReleaseDate = "9/11/01";
-		variance = 50;
-		earlyRelease = "4/20/01";
-		lateRelease = "9/11/27";
+		rfr = report; 
+		targetReleaseDate = rfr.getAverageReleaseDate();
+		variance = rfr.getVariance();
+		earlyRelease = rfr.getEarlyReleaseDate();
+		lateRelease = rfr.getLateReleaseDate();
 		projectName = rfr.getProductName();
 		releaseName = rfr.getReleaseName();
-		velocity = 50;
-		velocityLow = 15;
-		velocityHigh = 84;
+		velocity = rfr.getAvgSprintVel();
+		velocityLow = rfr.getLowVelocity();
+		velocityHigh = rfr.getHighVelocity();
 
 		// The panel for the top half (other than graph)
 		JPanel infoPanel = new InfoPanel();
 		add(infoPanel);
 
+		//The panel which includes the graph
 		try {
 			graphPanel = new DrawGraph();
 		} catch (Exception ex) {
@@ -141,48 +140,12 @@ public class RFRGUI extends JPanel {
 		public DrawGraph() throws Exception {
 			setBorder(new TitledBorder(mainBorderType, "RELEASE FORECAST", 0,
 					0, notAsBig));
-			targetForecastPoints = new ArrayList<Point>();
-			// get points from another class
+			targetForecastPoints = rfr.getTargetForecastLine();
+			totalPointsInRel = rfr.getTotalReleaseLine(); 
+			earlyReleasePoints = rfr.getEarlyReleaseLine(); 
+			averageReleasePoints = rfr.getAverageReleaseLine(); 
+			lateReleasePoints = rfr.getLateReleaseLine(); 
 
-			// add dummy data to the list for now
-			targetForecastPoints.add(new Point(1, 210));
-			targetForecastPoints.add(new Point(2, 230));
-			targetForecastPoints.add(new Point(3, 205));
-			targetForecastPoints.add(new Point(4, 195));
-			targetForecastPoints.add(new Point(5, 200));
-			targetForecastPoints.add(new Point(6, 0));
-			targetForecastPoints.add(new Point(7, 0));
-			targetForecastPoints.add(new Point(8, 0));
-			targetForecastPoints.add(new Point(9, 0));
-
-			totalPointsInRel = new ArrayList<Point>();
-			// get points from another class
-
-			// add dummy data for now
-			totalPointsInRel.add(new Point(1, 230));
-			totalPointsInRel.add(new Point(2, 230));
-			totalPointsInRel.add(new Point(3, 265));
-			totalPointsInRel.add(new Point(4, 285));
-			totalPointsInRel.add(new Point(5, 345));
-			totalPointsInRel.add(new Point(6, 450));
-			totalPointsInRel.add(new Point(7, 450));
-			totalPointsInRel.add(new Point(8, 450));
-			totalPointsInRel.add(new Point(9, 450));
-
-			earlyReleasePoints = new ArrayList<Point>();
-			averageReleasePoints = new ArrayList<Point>();
-			lateReleasePoints = new ArrayList<Point>();
-			for (int i = 1; i <= 5; i++) {
-				earlyReleasePoints.add(new Point(i, 84 * i));
-			}
-			for (int i = 1; i <= 9; i++) {
-				averageReleasePoints.add(new Point(i, 50 * i));
-			}
-			for (int i = 1; i <= 18; i++) {
-				lateReleasePoints.add(new Point(i, 15 * i));
-			}
-
-			// end adding dummy data!!!!
 			maxY = 100;
 			maxX = targetForecastPoints.size();
 			maxX = Math.max(maxX, Math.max(totalPointsInRel.size(), Math.max(
