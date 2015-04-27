@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.JPanel;
+
 import com.danube.scrumworks.api2.client.*;
 
 public class ReleaseForecastReport
@@ -12,9 +14,9 @@ public class ReleaseForecastReport
 	//protected APISoapClient client;
 	protected ScrumWorksAPIService service;
 	
-	//May need to change to an array, for use of multiple sprints
+	
 	public List<Date> endDate;
-	//Same as above
+	
 	public List<Date> startDate;
 	
 	public int totalStoryPoints;
@@ -100,9 +102,9 @@ public class ReleaseForecastReport
 		}
 	}
 	
-	public void calculateAvgSprintVel() 
+	public int calculateAvgSprintVel() 
 	{
-		// TODO implement me	
+		return (int) (getLowVelocity() / getHighVelocity());	
 	}
 	
 	//return average sprint velocity
@@ -127,9 +129,10 @@ public class ReleaseForecastReport
 		return 84; 
 	}
 	
-	public void calculateAverageReleaseDates()
+	public String calculateAverageReleaseDates()
 	{
-		// TODO implement me	
+		String result = "";
+		return result;	
 	}
 	
 	public String getAverageReleaseDate() { 
@@ -155,7 +158,8 @@ public class ReleaseForecastReport
 	
 	public void exportToPDF() 
 	{
-		// TODO implement me	
+		ExportTool et = new ExportTool();
+
 	}
 	
 	public void getTotalPoints() 

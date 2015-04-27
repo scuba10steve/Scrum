@@ -1,10 +1,13 @@
 package com.cs4910.project;
 
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import org.apache.pdfbox.exceptions.COSVisitorException;
@@ -22,6 +25,8 @@ public class ExportTool
 {
 	
 	private String filename;
+	private String imageFilename;
+	private BufferedImage image;
 	
 	protected APISoapClient client;
 	protected ScrumWorksAPIService service;
@@ -33,6 +38,8 @@ public class ExportTool
 		super();
 		client = new APISoapClient();
 		service = client.getAPIservice();
+		filename = "document.pdf";
+		imageFilename = "image.png";
 	}
 
 	
@@ -45,7 +52,7 @@ public class ExportTool
 		try {
 			contentStream = new PDPageContentStream(document, page);
 	
-			InputStream in = new FileInputStream("");
+			InputStream in = new FileInputStream(imageFilename);
 			PDJpeg img = new PDJpeg(document, in);
 			contentStream.drawImage(img, 100, 700);
 			contentStream.close();
@@ -64,5 +71,18 @@ public class ExportTool
 	public String getFilename()
 	{
 		return this.filename;
+	}
+	public void getDataFromPanel(JPanel panel)
+	{
+		panel.setSize(panel.getPreferredSize());
+		image = new BufferedImage(panel.getWidth(), panel.getHeight(), BufferedImage.TYPE_INT_RGB);
+		Graphics2D g = image.createGraphics();
+		panel.printAll(g);
+		g.dispose();
+		try { 
+		    ImageIO.write(image, "png", new File("image.png")); 
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
 	}
 }

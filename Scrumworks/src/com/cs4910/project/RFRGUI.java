@@ -2,8 +2,12 @@ package com.cs4910.project;
 
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
 import javax.swing.border.*;
+
+import org.apache.pdfbox.exceptions.COSVisitorException;
+
 import java.util.*;
 
 public class RFRGUI extends JPanel {
@@ -23,7 +27,7 @@ public class RFRGUI extends JPanel {
 	final Font notAsBig = new Font("Arial", Font.BOLD, 13);
 	final Border mainBorderType = new MatteBorder(2, 0, 0, 0, Color.BLACK);
 
-	public RFRGUI(ReleaseForecastReport report) {
+	public RFRGUI(ReleaseForecastReport report) throws COSVisitorException {
 		super(new GridLayout(2, 1, 0, 0));
 		setBorder(new EmptyBorder(10, 10, 10, 10));
 		rfr = report; 
@@ -49,6 +53,10 @@ public class RFRGUI extends JPanel {
 		}
 
 		add(graphPanel);
+		
+		ExportTool et = new ExportTool();
+		et.getDataFromPanel(this);
+		et.exportToPDF();
 	}
 
 	// subclass for the Information Panel

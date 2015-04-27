@@ -8,6 +8,8 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
+import org.apache.pdfbox.exceptions.COSVisitorException;
+
 import com.danube.scrumworks.api2.client.Product;
 import com.danube.scrumworks.api2.client.Release;
 import com.danube.scrumworks.api2.client.ScrumWorksAPIService;
@@ -134,7 +136,7 @@ public class Main extends JApplet {
 			mainPanel.removeAll(); 
 			mainPanel.revalidate(); 
 			mainPanel.repaint(); 
-			JPanel reportPanel; 
+			JPanel reportPanel = null; 
 			Product product = products.get(productBox.getSelectedIndex());
 			Release release = releases.get(releaseBox.getSelectedIndex()); 
 			if (releaseForecastRadio.isSelected()){
@@ -146,7 +148,12 @@ public class Main extends JApplet {
 					e1.printStackTrace();
 					return;
 				} 
-				reportPanel = new RFRGUI(rfr); 
+				try {
+					reportPanel = new RFRGUI(rfr);
+				} catch (COSVisitorException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
 			}
 			else { 
 				CommitmentRatioReport crr; 
