@@ -53,10 +53,17 @@ public class RFRGUI extends JPanel {
 		}
 
 		add(graphPanel);
-		
-		ExportTool et = new ExportTool();
-		et.getDataFromPanel(this);
-		et.exportToPDF();
+		try
+		{
+			ExportTool et = new ExportTool();
+			et.getDataFromPanel(this);
+			et.exportToPDF();
+			
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	// subclass for the Information Panel

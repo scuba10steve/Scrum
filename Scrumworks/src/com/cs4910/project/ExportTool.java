@@ -39,12 +39,13 @@ public class ExportTool
 		client = new APISoapClient();
 		service = client.getAPIservice();
 		filename = "document.pdf";
-		imageFilename = "image.png";
+		imageFilename = "image.jpg";
 	}
 
 	
-	public void exportToPDF() throws COSVisitorException 
+	public void exportToPDF() throws COSVisitorException
 	{
+		//wait(250);
 		PDDocument document = new PDDocument();
 		PDPage page = new PDPage(PDPage.PAGE_SIZE_LETTER);
 		document.addPage(page); 
@@ -74,13 +75,19 @@ public class ExportTool
 	}
 	public void getDataFromPanel(JPanel panel)
 	{
-		panel.setSize(panel.getPreferredSize());
+		/*try {
+			//wait(250);
+		} catch (InterruptedException e1) {
+			//  Auto-generated catch block
+			e1.printStackTrace();
+		}*/
+		//panel.setSize(panel.getPreferredSize());
 		image = new BufferedImage(panel.getWidth(), panel.getHeight(), BufferedImage.TYPE_INT_RGB);
 		Graphics2D g = image.createGraphics();
 		panel.printAll(g);
 		g.dispose();
-		try { 
-		    ImageIO.write(image, "png", new File("image.png")); 
+		try {
+		    ImageIO.write(image, "jpg", new File("image.jpg")); 
 		} catch (IOException e) {
 		    e.printStackTrace();
 		}
