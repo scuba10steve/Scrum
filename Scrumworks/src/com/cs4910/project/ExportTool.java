@@ -1,6 +1,8 @@
 package com.cs4910.project;
 
+import java.awt.AWTException;
 import java.awt.Graphics2D;
+import java.awt.Robot;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -46,15 +48,21 @@ public class ExportTool
 	public void exportToPDF() throws COSVisitorException
 	{
 		//wait(250);
-		PDDocument document = new PDDocument();
-		PDPage page = new PDPage(PDPage.PAGE_SIZE_LETTER);
-		document.addPage(page); 
-		PDPageContentStream contentStream;
+		
 		try {
-			contentStream = new PDPageContentStream(document, page);
-	
+			PDDocument document = new PDDocument();
+			PDPageContentStream contentStream;
 			InputStream in = new FileInputStream(imageFilename);
 			PDJpeg img = new PDJpeg(document, in);
+			PDPage page = new PDPage(PDPage.PAGE_SIZE_LETTER);
+			contentStream = new PDPageContentStream(document, page);
+			
+			
+			
+			
+			document.addPage(page); 
+			
+			
 			contentStream.drawImage(img, 100, 700);
 			contentStream.close();
 			document.save(filename);
@@ -73,7 +81,7 @@ public class ExportTool
 	{
 		return this.filename;
 	}
-	public void getDataFromPanel(JPanel panel)
+	public void getDataFromPanel(JPanel panel) throws AWTException
 	{
 		/*try {
 			//wait(250);
@@ -81,7 +89,8 @@ public class ExportTool
 			//  Auto-generated catch block
 			e1.printStackTrace();
 		}*/
-		//panel.setSize(panel.getPreferredSize());
+		panel.setSize(panel.getPreferredSize());
+		Robot r = new Robot();
 		image = new BufferedImage(panel.getWidth(), panel.getHeight(), BufferedImage.TYPE_INT_RGB);
 		Graphics2D g = image.createGraphics();
 		panel.printAll(g);

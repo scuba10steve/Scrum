@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
+import javax.swing.Timer;
 import javax.swing.border.*;
 
 import com.danube.scrumworks.api2.client.Product;
@@ -57,6 +58,32 @@ public class RFRGUI extends JPanel {
 		btn.addActionListener(new ExportToPDFListener()); 
 		for ( int i = 0 ; i < 3 ; i++ ) { 
 			exportBtnPanel.add(new JPanel()); 
+=======
+
+		add(graphPanel);
+		try
+		{
+			JPanel rfrPanel = this;
+			int delay=1000;// wait for second
+
+			Timer timer = new Timer(delay, new AbstractAction() {
+			    @Override
+			    public void actionPerformed(ActionEvent ae) {
+			        //action that you want performed 
+			    }
+			});
+			timer.setRepeats(false);//the timer should only go off once
+			timer.start();
+			
+			ExportTool et = new ExportTool();
+			et.getDataFromPanel(rfrPanel);
+			et.exportToPDF();
+			
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+>>>>>>> Stashed changes
 		}
 		exportBtnPanel.add(btn); 
 		graphPanel.add(exportBtnPanel, BorderLayout.SOUTH); 

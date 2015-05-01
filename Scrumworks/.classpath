@@ -4,5 +4,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="lib" path="/Users/steve/scrumworks/scrumworks-6.5.0/apiclient/ScrumWorks-soap.jar"/>
 	<classpathentry kind="lib" path="/Users/steve/scrumworks/scrumworks-6.5.0/apiclient/commons-lang-2.6/commons-lang-2.6.jar"/>
+	<classpathentry kind="lib" path="/Users/steve/GitHub/ScrumFucks/pdfbox/pdfbox-app-1.8.8.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
