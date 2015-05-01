@@ -61,7 +61,21 @@ public class RFRGUI extends JPanel {
 		exportBtnPanel.add(btn); 
 		graphPanel.add(exportBtnPanel, BorderLayout.SOUTH); 
 		add(graphPanel);
+<<<<<<< HEAD
 		
+=======
+		try
+		{
+			ExportTool et = new ExportTool();
+			et.getDataFromPanel(this);
+			et.exportToPDF();
+			
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+>>>>>>> origin/master
 	}
 
 	// subclass for the Information Panel
