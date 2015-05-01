@@ -6,7 +6,8 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
-import org.apache.pdfbox.exceptions.COSVisitorException;
+import com.danube.scrumworks.api2.client.Product;
+import com.danube.scrumworks.api2.client.ScrumWorksException;
 
 import java.util.*;
 
@@ -27,7 +28,7 @@ public class RFRGUI extends JPanel {
 	final Font notAsBig = new Font("Arial", Font.BOLD, 13);
 	final Border mainBorderType = new MatteBorder(2, 0, 0, 0, Color.BLACK);
 
-	public RFRGUI(ReleaseForecastReport report) throws COSVisitorException {
+	public RFRGUI(ReleaseForecastReport report) {//throws COSVisitorException {
 		super(new GridLayout(2, 1, 0, 0));
 		setBorder(new EmptyBorder(10, 10, 10, 10));
 		rfr = report; 
@@ -51,12 +52,16 @@ public class RFRGUI extends JPanel {
 		} catch (Exception ex) {
 			System.out.println("ERROR: " + ex.getMessage());
 		}
-
+		JPanel exportBtnPanel = new JPanel(new GridLayout(1,4)); 
+		JButton btn = new JButton("Export to PDF"); 
+		btn.addActionListener(new ExportToPDFListener()); 
+		for ( int i = 0 ; i < 3 ; i++ ) { 
+			exportBtnPanel.add(new JPanel()); 
+		}
+		exportBtnPanel.add(btn); 
+		graphPanel.add(exportBtnPanel, BorderLayout.SOUTH); 
 		add(graphPanel);
 		
-		ExportTool et = new ExportTool();
-		et.getDataFromPanel(this);
-		et.exportToPDF();
 	}
 
 	// subclass for the Information Panel
@@ -127,7 +132,6 @@ public class RFRGUI extends JPanel {
 
 	// subclass for the Graph Panel
 	public class DrawGraph extends JPanel {
-
 		ArrayList<Point> targetForecastPoints;
 		ArrayList<Point> totalPointsInRel;
 		ArrayList<Point> earlyReleasePoints;
@@ -146,6 +150,7 @@ public class RFRGUI extends JPanel {
 
 		// Basic Constructor
 		public DrawGraph() throws Exception {
+			super(new BorderLayout()); 
 			setBorder(new TitledBorder(mainBorderType, "RELEASE FORECAST", 0,
 					0, notAsBig));
 			targetForecastPoints = rfr.getTargetForecastLine();
@@ -305,6 +310,14 @@ public class RFRGUI extends JPanel {
 			int verticalPixels = getHeight() - 2 * VERT_OFFSET;
 			double scaleY = (double) verticalPixels / maxY;
 			return VERT_OFFSET + (int) (scaleY * y);
+		}
+	}
+	
+	private class ExportToPDFListener implements ActionListener { 
+		@Override
+		public void actionPerformed(ActionEvent e){ 
+			//put your code here, Steven
+			System.out.println("Export to PDF."); 
 		}
 	}
 }
