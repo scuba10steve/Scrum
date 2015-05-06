@@ -3,6 +3,7 @@ package com.cs4910.project;
 import java.awt.AWTException;
 import java.awt.Graphics2D;
 import java.awt.Robot;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -53,17 +54,17 @@ public class ExportTool
 			PDDocument document = new PDDocument();
 			PDPageContentStream contentStream;
 			InputStream in = new FileInputStream(imageFilename);
-			PDJpeg img = new PDJpeg(document, in);
 			PDPage page = new PDPage(PDPage.PAGE_SIZE_LETTER);
+			PDJpeg img = new PDJpeg(document, in);
+			page.setRotation(90);
+			AffineTransform at = new AffineTransform(image.getHeight(), 0, 0, image.getWidth(), 0, 0);
+			at.rotate(Math.toRadians(90));
 			contentStream = new PDPageContentStream(document, page);
-			
-			
-			
-			
+		
 			document.addPage(page); 
 			
 			
-			contentStream.drawImage(img, 100, 700);
+			contentStream.drawXObject(img, at);
 			contentStream.close();
 			document.save(filename);
 		} catch (IOException e) {
@@ -89,9 +90,10 @@ public class ExportTool
 			//  Auto-generated catch block
 			e1.printStackTrace();
 		}*/
-		panel.setSize(panel.getPreferredSize());
+		//panel.setSize((panel.getBounds());
 		Robot r = new Robot();
-		image = new BufferedImage(panel.getWidth(), panel.getHeight(), BufferedImage.TYPE_INT_RGB);
+		
+		image = r.createScreenCapture(panel.getBounds());
 		Graphics2D g = image.createGraphics();
 		panel.printAll(g);
 		g.dispose();

@@ -7,6 +7,8 @@ import javax.swing.*;
 import javax.swing.Timer;
 import javax.swing.border.*;
 
+import org.apache.pdfbox.exceptions.COSVisitorException;
+
 import com.danube.scrumworks.api2.client.Product;
 import com.danube.scrumworks.api2.client.ScrumWorksException;
 
@@ -15,6 +17,7 @@ import java.util.*;
 public class RFRGUI extends JPanel {
 	private ReleaseForecastReport rfr ; 
 	private JPanel graphPanel; // panel for displaying graph
+	JPanel rfrPanel = this;
 	private int velocity;
 	private int velocityLow;
 	private int velocityHigh;
@@ -31,6 +34,7 @@ public class RFRGUI extends JPanel {
 
 	public RFRGUI(ReleaseForecastReport report) {//throws COSVisitorException {
 		super(new GridLayout(2, 1, 0, 0));
+		this.setBounds(new Rectangle(1000, 620));
 		setBorder(new EmptyBorder(10, 10, 10, 10));
 		rfr = report; 
 		targetReleaseDate = rfr.getAverageReleaseDate();
@@ -58,7 +62,7 @@ public class RFRGUI extends JPanel {
 		btn.addActionListener(new ExportToPDFListener()); 
 		for ( int i = 0 ; i < 3 ; i++ ) { 
 			exportBtnPanel.add(new JPanel()); 
-=======
+		}
 
 		add(graphPanel);
 		try
@@ -83,7 +87,6 @@ public class RFRGUI extends JPanel {
 		catch (Exception e)
 		{
 			e.printStackTrace();
->>>>>>> Stashed changes
 		}
 		exportBtnPanel.add(btn); 
 		graphPanel.add(exportBtnPanel, BorderLayout.SOUTH); 
@@ -343,7 +346,18 @@ public class RFRGUI extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e){ 
 			//put your code here, Steven
-			System.out.println("Export to PDF."); 
+			ExportTool et = new ExportTool();
+			try {
+				et.getDataFromPanel(rfrPanel);
+				et.exportToPDF();
+			} catch (AWTException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (COSVisitorException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			System.out.println("Export to PDF.");
 		}
 	}
 }

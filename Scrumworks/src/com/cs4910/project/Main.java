@@ -148,12 +148,7 @@ public class Main extends JApplet {
 					e1.printStackTrace();
 					return;
 				} 
-				try {
-					reportPanel = new RFRGUI(rfr);
-				} catch (COSVisitorException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} 
+				reportPanel = new RFRGUI(rfr); 
 			}
 			else { 
 				CommitmentRatioReport crr; 
